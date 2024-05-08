@@ -1,0 +1,186 @@
+/* revert from BS */
+
+hr {
+  all: revert
+}
+
+/*hr, h1, input {
+  all: revert
+}*/
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(left,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0));
+  background-image: -ms-linear-gradient(left,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(left,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0));
+}
+
+/*FORM*/
+
+.form {
+  padding-left: 8px;
+  padding-right: 8px;
+  font-family: "Source Sans Pro", sans-serif;
+  box-sizing: content-box;
+  line-height: 1.2;
+}
+
+.form input[type="button"] {
+  margin: 4px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px;
+  background-color: #999;
+  border: 1px solid #666;
+  color: #111;
+  box-shadow: 3px 3px 3px 0px #222;
+  cursor: pointer;
+}
+
+.form input[type="button"]:active {
+  background-color: #111;
+  border: 1px solid #666;
+  color: #999;
+  cursor: pointer;
+}
+
+.form input[type="button"]:disabled {
+  background-color: #333;
+  border: 1px solid #222;
+  box-shadow: 3px 3px 3px 0px #111;
+  color: #222;
+  cursor: not-allowed;
+}
+
+#FORM {
+  position: absolute;
+  border: 1px solid #645454;
+  border-radius: 7px;
+  background: #000;
+  z-index: 999;
+}
+
+#FORM h1 {
+  font-family: "Garamond";
+  text-align: center;
+  font-size: 16px;
+  color: #999;
+  text-shadow: 1px 1px #666;
+  margin: 0px;
+  /*margin-top: 4px;*/
+  padding: 0px;
+}
+
+#FORM hr {
+  border: 0;
+  border-top: 1px solid #222;
+}
+
+#FORM img {
+  position: relative;
+}
+
+.form span {
+  font-family: "Consolas";
+  color: #777;
+  padding: 16px;
+}
+
+.fightWindow {
+  padding: 0px;
+  float: left;
+  width: 100px;
+  font-family: "Source Sans Pro", sans-serif;
+  box-sizing: content-box;
+}
+
+.fightWindow p {
+  color: #0d0;
+  font-size: 14px;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.fightWindow p.attr {
+  font-family: "Garamond";
+  color: #999;
+  text-shadow: 1px 1px #666;
+  font-size: 16px;
+  text-align: left;
+  padding: 0px;
+  padding-left: 12px;
+  margin: 0px;
+}
+
+div .healthbar {
+  padding: 5px;
+  box-sizing: content-box;
+}
+
+span.scroll_counter {
+  padding: 0px;
+  padding-right: 0px;
+  padding-right: 20px;
+  font-size: 14px;
+}
+
+.form input[type="image"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.4
+}
+
+div#Console p {
+  color: #0F0;
+  font-family: Consolas;
+  font-size: 11px;
+  padding-left: 8px;
+  margin: 0px;
+}
+
+.blue {
+  color: #00F !important;
+  padding: 0px !important;
+}
+
+.red {
+  color: #F00 !important;
+  padding: 0px !important;
+}
+
+.orange {
+  color: #FFA500 !important;
+  padding: 0px !important;
+}
+
+#scrollPanel {
+  clear: both;
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #000;
+  justify-content: safe center;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+#scrollPanel input[type="image"] {
+  padding-right: 0px;
+  flex-shrink: 0;
+}
