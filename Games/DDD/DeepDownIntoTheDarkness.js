@@ -8,7 +8,6 @@
 /*  
  
  to do:
-  * score
   * engine upgrade
   * animation speed
  
@@ -83,7 +82,7 @@ const INI = {
   FINAL_GOLD: 100
 };
 const PRG = {
-  VERSION: "1.01.02",
+  VERSION: "1.02.00",
   CSS: "color: #80f709",
   NAME: "Deep Down Into the Darkness",
   YEAR: 2020,
@@ -93,14 +92,14 @@ const PRG = {
     console.log(
       `%c${PRG.NAME} ${PRG.VERSION} by Lovro Selic, (c) LaughingSkull ${PRG.YEAR} on ˘${navigator.userAgent}`,
       PRG.CSS
-      );
+    );
     $("#title").html(PRG.NAME);
     $("#version").html(
       PRG.NAME +
       " V" +
       PRG.VERSION +
       " <span style='font-size:14px'>&copy</span> LaughingSkull 2020"
-      );
+    );
     $("input#toggleAbout").val("About " + PRG.NAME);
     $("#about fieldset legend").append(" " + PRG.NAME + " ");
 
@@ -150,7 +149,7 @@ const PRG = {
       $("#bottom").css(
         "margin-top",
         ENGINE.gameHEIGHT + ENGINE.titleHEIGHT + ENGINE.bottomHEIGHT
-        );
+      );
       $(ENGINE.gameWindowId).width(ENGINE.gameWIDTH + ENGINE.sideWIDTH + 4);
       ENGINE.addBOX(
         "TITLE",
@@ -158,7 +157,7 @@ const PRG = {
         ENGINE.titleHEIGHT,
         ["title"],
         null
-        );
+      );
       ENGINE.addBOX(
         "ROOM",
         ENGINE.gameWIDTH,
@@ -177,21 +176,21 @@ const PRG = {
           "click"
         ],
         "side"
-        );
+      );
       ENGINE.addBOX(
         "SIDE",
         ENGINE.sideWIDTH,
         ENGINE.gameHEIGHT,
         ["sideback", "status", "map", "time"],
         "fside"
-        );
+      );
       ENGINE.addBOX(
         "DOWN",
         ENGINE.bottomWIDTH,
         ENGINE.bottomHEIGHT,
         ["bottom", "bottomText"],
         null
-        );
+      );
 
       ENGINE.addBOX(
         "LEVEL",
@@ -199,7 +198,7 @@ const PRG = {
         ENGINE.gameHEIGHT,
         ["floor", "wall", "config", "fog", "coord"],
         null
-        );
+      );
       if (!DEBUG.level)
         $("#LEVEL").addClass("hidden");
     }
@@ -247,8 +246,8 @@ class Gold {
         "#DAA520",
         125,
         10
-        )
-      );
+      )
+    );
     TITLE.change();
     AUDIO.Pick.play();
   }
@@ -416,7 +415,7 @@ class Scroll {
         GAME.TURN.enemy.health = Math.ceil(GAME.TURN.enemy.health / 2);
         CONSOLE.print(
           `<span class="blue">${HERO.name}</span> drained <span class="red">${GAME.TURN.enemy.title}'s</span> life.`
-          );
+        );
         break;
 
       case "Luck":
@@ -445,7 +444,7 @@ class Scroll {
           let enemy = POOL[q];
           let distance = HERO.MoveState.endGrid.distanceDiagonal(
             enemy.MoveState.endGrid
-            );
+          );
           if (distance <= INI.MANA_DRAIN_RANGE) {
             enemy.speed = 1;
             enemy.agility = drain(enemy.agility);
@@ -480,7 +479,7 @@ class Scroll {
           let enemy = POOL[q];
           let distance = HERO.MoveState.endGrid.distanceDiagonal(
             enemy.MoveState.endGrid
-            );
+          );
           if (distance <= INI.MANA_DRAIN_RANGE) {
             enemy.mana = 0;
           }
@@ -488,35 +487,35 @@ class Scroll {
         break;
 
       case "BoostWeapon":
-        $("#hero_sword").css({color: "blue"});
+        $("#hero_sword").css({ color: "blue" });
         HERO.weapon = inflate(HERO.weapon);
         CONSOLE.print(
           `<span class="blue">${HERO.name}</span> applied magical sharpening oil to the sword.`
-          );
+        );
         break;
 
       case "BoostArmor":
-        $("#hero_shield").css({color: "blue"});
+        $("#hero_shield").css({ color: "blue" });
         HERO.armor = inflate(HERO.armor);
         CONSOLE.print(
           `<span class="blue">${HERO.name}</span> applied magic protection oil to the armor.`
-          );
+        );
         break;
 
       case "DestroyArmor":
-        $("#enemy_armor").css({color: "red"});
+        $("#enemy_armor").css({ color: "red" });
         GAME.TURN.enemy.armor = drain(GAME.TURN.enemy.armor);
         CONSOLE.print(
           `<span class="blue">${HERO.name}</span> magically lowered <span class="red">${GAME.TURN.enemy.title}'s</span> defense.`
-          );
+        );
         break;
 
       case "DestroyWeapon":
-        $("#enemy_weapon").css({color: "red"});
+        $("#enemy_weapon").css({ color: "red" });
         GAME.TURN.enemy.weapon = drain(GAME.TURN.enemy.weapon);
         CONSOLE.print(
           `<span class="blue">${HERO.name}</span> magically drained <span class="red">${GAME.TURN.enemy.title}'s</span> weapons.`
-          );
+        );
         break;
 
       case "Petrify":
@@ -527,7 +526,7 @@ class Scroll {
             continue;
           let distance = HERO.MoveState.endGrid.distanceDiagonal(
             enemy.MoveState.endGrid
-            );
+          );
           if (distance <= INI.PETRIFY_RANGE) {
             enemy.petrify();
           }
@@ -555,20 +554,20 @@ class Scroll {
   }
 }
 const SCROLLS = [
-  {type: "Light", use: "explore"},
-  {type: "Invisibility", use: "explore"},
-  {type: "Map", use: "explore"},
-  {type: "DrainMana", use: "explore"},
-  {type: "Cripple", use: "explore"},
-  {type: "BoostWeapon", use: "fight"},
-  {type: "BoostArmor", use: "fight"},
-  {type: "DestroyArmor", use: "fight"},
-  {type: "DestroyWeapon", use: "fight"},
-  {type: "Petrify", use: "explore"},
-  {type: "MagicBoost", use: "explore"},
-  {type: "TeleportTemple", use: "explore"},
-  {type: "Luck", use: "explore"},
-  {type: "HalfLife", use: "fight"}
+  { type: "Light", use: "explore" },
+  { type: "Invisibility", use: "explore" },
+  { type: "Map", use: "explore" },
+  { type: "DrainMana", use: "explore" },
+  { type: "Cripple", use: "explore" },
+  { type: "BoostWeapon", use: "fight" },
+  { type: "BoostArmor", use: "fight" },
+  { type: "DestroyArmor", use: "fight" },
+  { type: "DestroyWeapon", use: "fight" },
+  { type: "Petrify", use: "explore" },
+  { type: "MagicBoost", use: "explore" },
+  { type: "TeleportTemple", use: "explore" },
+  { type: "Luck", use: "explore" },
+  { type: "HalfLife", use: "fight" }
 ];
 const HERO = {
   construct() {
@@ -623,7 +622,7 @@ const HERO = {
       "Invisibility",
       INI.INVISIBILITY_TIME,
       HERO.visible
-      );
+    );
     HERO.spriteClass = "KnightInvisible";
     HERO.setSpriteClass(HERO.spriteClass);
   },
@@ -641,7 +640,7 @@ const HERO = {
       "Magic Coat",
       INI.MAGIC_BOOST_TIME,
       HERO.resetMagic
-      );
+    );
     HERO.spriteClass = "KnightCoated";
     HERO.setSpriteClass(HERO.spriteClass);
   },
@@ -665,7 +664,7 @@ const HERO = {
     HERO.MoveState = new MoveState(
       MAP[GAME.level].DUNGEON[GAME.location],
       DOWN
-      );
+    );
     ENGINE.VIEWPORT.check(HERO.actor);
     ENGINE.VIEWPORT.alignTo(HERO.actor);
   },
@@ -677,7 +676,7 @@ const HERO = {
       HERO.actor.vx,
       HERO.actor.vy,
       HERO.actor.sprite()
-      );
+    );
     ENGINE.layersToClear.add("actors");
   },
   move() {
@@ -749,8 +748,8 @@ const HERO = {
               SPRITE.Door,
               SPRITE.Door.height,
               1
-              )
-            );
+            )
+          );
           MINIMAP.maps[GAME.level].map[
             GRID.gridToIndex(MAP[GAME.level].DUNGEON.door)
           ] = 1;
@@ -758,7 +757,7 @@ const HERO = {
           MAP[GAME.level].DUNGEON.setObstacles(
             MAP[GAME.level].DUNGEON.door,
             MAP[GAME.level].DUNGEON.gate
-            );
+          );
           HERO.inventory.delete(SPRITE.silverKey);
           GAME.PAINT.config();
           TITLE.change();
@@ -769,8 +768,8 @@ const HERO = {
               GRID.gridToCoord(this.MoveState.homeGrid),
               "#00FF00",
               100
-              )
-            );
+            )
+          );
         } else {
           HERO.MoveState.reverse();
           AUDIO.ClosedDoor.play();
@@ -787,8 +786,8 @@ const HERO = {
               SPRITE.Gate,
               SPRITE.Gate.height,
               1
-              )
-            );
+            )
+          );
           MINIMAP.maps[GAME.level].map[
             GRID.gridToIndex(MAP[GAME.level].DUNGEON.gate)
           ] = 1;
@@ -796,7 +795,7 @@ const HERO = {
           MAP[GAME.level].DUNGEON.setObstacles(
             MAP[GAME.level].DUNGEON.door,
             MAP[GAME.level].DUNGEON.gate
-            );
+          );
           HERO.inventory.delete(SPRITE.goldKey);
           GAME.PAINT.config();
           TITLE.change();
@@ -807,8 +806,8 @@ const HERO = {
               GRID.gridToCoord(this.MoveState.homeGrid),
               "#00FF00",
               100
-              )
-            );
+            )
+          );
         } else {
           HERO.MoveState.reverse();
           AUDIO.ClosedDoor.play();
@@ -824,7 +823,7 @@ const HERO = {
               const note = "Cave in. Upper floor inaccessible.";
               const point = GRID.gridToCoord(
                 MAP[GAME.level].DUNGEON.entrance.add(UP)
-                );
+              );
               TEXTPOOL.pool.push(new TextSprite(note, point));
             } else {
               HERO.usingStairs(-1);
@@ -859,8 +858,8 @@ const HERO = {
             GRID.gridToCoord(this.MoveState.homeGrid),
             "#00FF00",
             100
-            )
-          );
+          )
+        );
         break;
 
       case "temple":
@@ -910,10 +909,10 @@ const HERO = {
     HERO.health += addHealth;
     let above = GRID.gridToCoord(HERO.MoveState.homeGrid.add(UP)).add(
       new Vector(0, 24)
-      );
+    );
     TEXTPOOL.pool.push(
       new TextSprite(("+" + addHealth).toString(), above, "#DD0000", 50)
-      );
+    );
     HERO.health = Math.min(HERO.health, HERO.maxHealth);
     TITLE.change();
     return realHealing;
@@ -921,12 +920,12 @@ const HERO = {
   incMana() {
     let above = GRID.gridToCoord(HERO.MoveState.homeGrid.add(UP)).add(
       new Vector(0, 24)
-      );
+    );
     let addMana = Math.round(INI.Health_INC * HERO.maxMana);
     HERO.mana += addMana;
     TEXTPOOL.pool.push(
       new TextSprite(("+" + addMana).toString(), above, "#0000EE", 50)
-      );
+    );
     HERO.mana = Math.min(HERO.mana, HERO.maxMana);
     TITLE.change();
   },
@@ -1008,13 +1007,13 @@ const HERO = {
       AUDIO.MagicCast.play();
       ORBS.pool.push(
         new Orb(HERO.MoveState.homeGrid, dir, power, HERO.magic, "friendly")
-        );
+      );
     } else {
       HERO.decMana(1);
       AUDIO.MagicFail.play();
       EXPLOSIONS.pool.push(
         new AnimationSPRITE(HERO.actor.x, HERO.actor.y, "Fizzle_", 10)
-        );
+      );
     }
 
     function success() {
@@ -1050,7 +1049,7 @@ const HERO = {
     if (damage > 0) {
       CONSOLE.print(
         `<span class="blue">${HERO.name}</span> hits and makes <span class="orange">${damage}</span> damage.`
-        );
+      );
       enemy.health -= damage;
       if (enemy.health <= 0) {
         enemy.prepareForDeath();
@@ -1146,12 +1145,12 @@ class Orb {
       this.actor.vx,
       this.actor.vy,
       this.actor.sprite()
-      );
+    );
   }
   fizzle() {
     EXPLOSIONS.pool.push(
       new AnimationSPRITE(this.actor.x, this.actor.y, "Fizzle_", 10)
-      );
+    );
   }
 }
 const ORBS = {
@@ -1198,7 +1197,7 @@ const ORBS = {
       if (GRID.gridIsBlock(orb.MoveState.homeGrid)) {
         EXPLOSIONS.pool.push(
           new AnimationSPRITE(orb.actor.x, orb.actor.y, "ShipExp", 8)
-          );
+        );
         ORBS.pool.splice(q, 1);
         AUDIO.Explosion.play();
         continue; //next orb
@@ -1232,25 +1231,25 @@ const ORBS = {
             enemy.health -= damage;
             let above = GRID.gridToCoord(enemy.MoveState.homeGrid.add(UP)).add(
               new Vector(0, 24)
-              );
+            );
             if (damage === 0) {
               TEXTPOOL.pool.push(
                 new TextSprite("Resisted".toString(), above, "#AAA", 50)
-                );
+              );
               EXPLOSIONS.pool.push(
                 new AnimationSPRITE(orb.actor.x, orb.actor.y, "Fizzle_", 10)
-                );
+              );
             } else if (enemy.health > 0) {
               TEXTPOOL.pool.push(
                 new TextSprite(("-" + damage).toString(), above, "#FF0000", 50)
-                );
+              );
               EXPLOSIONS.pool.push(
                 new AnimationSPRITE(orb.actor.x, orb.actor.y, "AlienExp", 6)
-                );
+              );
             } else {
               EXPLOSIONS.pool.push(
                 new AnimationSPRITE(orb.actor.x, orb.actor.y, "ShipExp", 8)
-                );
+              );
               if (LOG[enemy.title] === undefined) {
                 LOG[enemy.title] = new Log();
               }
@@ -1283,25 +1282,25 @@ const ORBS = {
           TITLE.change();
           let above = GRID.gridToCoord(HERO.MoveState.homeGrid.add(UP)).add(
             new Vector(0, 22)
-            );
+          );
           if (damage === 0) {
             TEXTPOOL.pool.push(
               new TextSprite("Resisted".toString(), above, "#AAA", 50)
-              );
+            );
             EXPLOSIONS.pool.push(
               new AnimationSPRITE(orb.actor.x, orb.actor.y, "Fizzle_", 10)
-              );
+            );
           } else if (HERO.health > 0) {
             TEXTPOOL.pool.push(
               new TextSprite(("-" + damage).toString(), above, "#FF0022", 50)
-              );
+            );
             EXPLOSIONS.pool.push(
               new AnimationSPRITE(orb.actor.x, orb.actor.y, "AlienExp", 6)
-              );
+            );
           } else {
             EXPLOSIONS.pool.push(
               new AnimationSPRITE(orb.actor.x, orb.actor.y, "ShipExp", 8)
-              );
+            );
             console.log("HERO died from Orb collision");
             HERO.death();
           }
@@ -1324,7 +1323,7 @@ const ENEMY = {
           enemy.actor.vx,
           enemy.actor.vy,
           enemy.actor.sprite()
-          );
+        );
       }
       ENGINE.layersToClear.add("actors");
     }
@@ -1339,7 +1338,7 @@ const ENEMY = {
         continue;
       let distance = HERO.MoveState.endGrid.distanceDiagonal(
         enemy.MoveState.endGrid
-        );
+      );
       if (enemy.MoveState.moving) {
         if (checkFreedom(q))
           GRID.translateMove(enemy);
@@ -1367,18 +1366,18 @@ const ENEMY = {
               distance <= INI.STALK_DISTANCE &&
               enemy.visible &&
               !enemy.canShoot
-              ) {
+            ) {
               enemy.strategy = "stalk";
             } else
               enemy.strategy = "hunt";
             if (enemy.canShoot) {
               let direction = enemy.MoveState.endGrid.absDirection(
                 HERO.MoveState.endGrid
-                );
+              );
               if (direction.isOrto() || direction.isDiagonal()) {
                 if (
                   GRID.vision(enemy.MoveState.endGrid, HERO.MoveState.endGrid)
-                  ) {
+                ) {
                   enemy.mana -= cost;
                   ORBS.pool.push(
                     new Orb(
@@ -1387,8 +1386,8 @@ const ENEMY = {
                       setPower(enemy),
                       enemy.magic,
                       "deadly"
-                      )
-                    );
+                    )
+                  );
                   enemy.casted();
                   continue;
                 }
@@ -1417,7 +1416,7 @@ const ENEMY = {
               path = GRID.AI.wanderer.hunt(
                 enemy.MoveState,
                 MAP[GAME.level].DUNGEON.obstacles
-                ).return;
+              ).return;
               break;
 
             case "hunt":
@@ -1440,7 +1439,7 @@ const ENEMY = {
                 enemy.MoveState,
                 HERO.MoveState.endGrid,
                 INI.STALK_DISTANCE
-                ).return;
+              ).return;
               break;
 
             case "goto":
@@ -1448,7 +1447,7 @@ const ENEMY = {
                 enemy.MoveState.endGrid,
                 enemy.guarding,
                 MAP[GAME.level].DUNGEON
-                );
+              );
               if (node === null) {
                 enemy.strategy = "guard";
                 break;
@@ -1492,8 +1491,8 @@ const ENEMY = {
             GRID.same(
               MAP[GAME.level].DUNGEON.ENEMY[q].MoveState.endGrid,
               MAP[GAME.level].DUNGEON.ENEMY[W].MoveState.endGrid
-              )
             )
+          )
             return false;
         }
       }
@@ -1565,7 +1564,7 @@ const GAME = {
     ];
     SAVE_GAME.lists = ["HERO.scrolls"];
     SAVE_GAME.timers = ["Main"];
-    SAVE_GAME.objects = [{obj: "LOG", class: "Log"}];
+    SAVE_GAME.objects = [{ obj: "LOG", class: "Log" }];
 
     if (GAME.fromCheckpoint) {
       console.log(`%c ... Loading from checkpoint ...`, GAME.CSS);
@@ -1600,12 +1599,12 @@ const GAME = {
     let level = Math.min(
       INI.LAST_LEVEL,
       GAME.level + MAP[GAME.level].nemesisSpawned
-      );
+    );
     GAME.levelTime = new CountDown(
       "Nemesis",
       INI.NEMESIS_RESPAWN,
       GAME.spawnNemesis,
-      {level: level, origin: GAME.level}
+      { level: level, origin: GAME.level }
     );
   },
   levelExecute() {
@@ -1631,7 +1630,7 @@ const GAME = {
         "Nemesis",
         INI.NEMESIS_RESPAWN,
         GAME.spawnNemesis,
-        {level: GAME.level, origin: GAME.level}
+        { level: GAME.level, origin: GAME.level }
       );
     }
     if (HERO.level === 0) {
@@ -1681,7 +1680,7 @@ const GAME = {
       MAP[level].ph = MAP[level].height * ENGINE.INI.GRIDPIX;
     } else
       MAP[level].returning = true;
-    ENGINE.VIEWPORT.setMax({x: MAP[level].pw, y: MAP[level].ph});
+    ENGINE.VIEWPORT.setMax({ x: MAP[level].pw, y: MAP[level].ph });
     MINIMAP.create(level);
     MAP[level].nemesisSpawned = 0;
   },
@@ -1734,7 +1733,7 @@ const GAME = {
       MAP[level].grid,
       TEXTURE[MAP[level].floor],
       TEXTURE[MAP[level].background]
-      );
+    );
     ENGINE.flattenLayers("wall", "floor");
     GAME.PAINT.config();
     if (DEBUG.fog) {
@@ -1829,7 +1828,7 @@ const GAME = {
       TITLE.stack.scrollIndex = Math.min(
         HERO.scrolls.size() - 1,
         TITLE.stack.scrollIndex
-        );
+      );
       TITLE.change();
       ENGINE.GAME.keymap[ENGINE.KEY.map.D] = false;
     }
@@ -1865,7 +1864,7 @@ const GAME = {
         HERO.scrolls.info(TITLE.stack.scrollIndex, "type") ===
         "TeleportTemple" &&
         MAP[GAME.level].fixed
-        )
+      )
         return;
       let scroll = HERO.scrolls.remove(TITLE.stack.scrollIndex);
       scroll.action();
@@ -1898,14 +1897,13 @@ const GAME = {
     if (sg) {
       $("#buttons").append(
         "<input type='button' id='checkpoint' value='Continue Game from CHECKPOINT'>"
-        );
+      );
       $("#checkpoint").on("click", PRG.checkpoint);
     }
     console.log("%cGAME SETUP finished", PRG.CSS);
   },
   end() {
     console.log("%cGAME ENDED", "color: #FFF");
-    console.log("");
     GAME.checkScore();
     GAME.fromCheckpoint = false;
   },
@@ -1920,7 +1918,7 @@ const GAME = {
             GRID.paintText(point, text, layer);
           }
         }
-    }
+      }
     },
     config() {
       ENGINE.VIEWPORT.changed = true;
@@ -1932,7 +1930,7 @@ const GAME = {
           layer,
           MAP[GAME.level].DUNGEON.entrance,
           SPRITE.Entrance
-          );
+        );
       }
       if (MAP[GAME.level].DUNGEON.exit) {
         ENGINE.spriteToGrid(layer, MAP[GAME.level].DUNGEON.exit, SPRITE.Exit);
@@ -1942,7 +1940,7 @@ const GAME = {
           layer,
           MAP[GAME.level].DUNGEON.temple,
           SPRITE.temple
-          );
+        );
       }
 
       if (MAP[GAME.level].DUNGEON.gate)
@@ -1954,13 +1952,13 @@ const GAME = {
           layer,
           MAP[GAME.level].DUNGEON.goldKey,
           SPRITE.goldKey
-          );
+        );
       if (MAP[GAME.level].DUNGEON.silverKey)
         ENGINE.spriteToGrid(
           layer,
           MAP[GAME.level].DUNGEON.silverKey,
           SPRITE.silverKey
-          );
+        );
       //paint if exists
       GAME.PAINT.gold(layer);
       GAME.PAINT.lamp(layer);
@@ -1992,7 +1990,7 @@ const GAME = {
         let q = 0, GL = MAP[GAME.level].DUNGEON.potions.length;
         q < GL;
         q++
-        ) {
+      ) {
         let potion = MAP[GAME.level].DUNGEON.potions[q];
         ENGINE.spriteToGrid(layer, potion.grid, potion.sprite);
       }
@@ -2020,7 +2018,7 @@ const GAME = {
         let q = 0, GL = MAP[GAME.level].DUNGEON.scrolls.length;
         q < GL;
         q++
-        ) {
+      ) {
         let scroll = MAP[GAME.level].DUNGEON.scrolls[q];
         ENGINE.spriteToGrid(layer, scroll.grid, scroll.sprite);
       }
@@ -2037,7 +2035,7 @@ const GAME = {
     $("#pause").on("click", GAME.resume);
     ENGINE.GAME.ANIMATION.next(
       ENGINE.KEY.waitFor.bind(null, GAME.clickPause, "F4")
-      );
+    );
 
     ENGINE.TEXT.setFS(40);
     ENGINE.TEXT.centeredText("Game Paused", 300);
@@ -2093,7 +2091,7 @@ const GAME = {
       if (healed === 0) {
         CONSOLE.print(
           `<span class="blue">${HERO.name}</span> has full health already.`
-          );
+        );
       } else {
         CONSOLE.print(`
         <span class="blue">${HERO.name}</span> heals ${healed} points.
@@ -2222,7 +2220,7 @@ const GAME = {
       HERO.health,
       HERO.maxHealth,
       "red"
-      );
+    );
     ENGINE.statusBar(
       LAYER.enemy_health,
       0,
@@ -2232,7 +2230,7 @@ const GAME = {
       enemy.health,
       enemy.maxHealth,
       "orange"
-      );
+    );
 
     $("#count_redPotion").html(HERO.redPotion.toString().padStart(2, "0"));
 
@@ -2278,7 +2276,7 @@ const GAME = {
       "Temple",
       INI.TEMPLE_TIMEOUT,
       GAME.allowInTemple
-      );
+    );
     GAME.levelContinue();
   },
   allowInTemple() {
@@ -2310,7 +2308,7 @@ const GAME = {
       chance > 0 &&
       GAME.TURN.agility_accumulator > INI.AGILITY_TURN * -1 &&
       selectedDir !== null
-      ) {
+    ) {
       CONSOLE.print(` ... and succeeds.`);
       HERO.MoveState.dir = selectedDir;
       GRID.blockMove(HERO, true);
@@ -2384,11 +2382,11 @@ const GAME = {
     if (delta + initiative * INI.INITIATIVE_BONUS >= 0) {
       CONSOLE.print(
         `<span class="blue">${HERO.name}</span> attacks <span class="red">${enemy.title}</span>.`
-        );
+      );
     } else {
       CONSOLE.print(
         `<span class="red">${enemy.title}</span> attacks <span class="blue">${HERO.name}</span>.`
-        );
+      );
       enemy.turn(enemy);
     }
     GAME.fightRefresh();
@@ -2428,7 +2426,7 @@ const GAME = {
       GAME.TURN.agility_accumulator += INI.AGILITY_TURN;
       CONSOLE.print(
         `<span class="blue">${HERO.name}</span> fell behind and missed turn.`
-        );
+      );
     }
     if (!GAME.TURN.fight_active)
       return;
@@ -2438,7 +2436,7 @@ const GAME = {
       GAME.TURN.agility_accumulator -= INI.AGILITY_TURN;
       CONSOLE.print(
         `<span class="red">${enemy.title}</span> fell behind and missed turn.`
-        );
+      );
     }
 
     GAME.TURN.enemyDamage += Math.max(enemyDamage, 0);
@@ -2448,11 +2446,11 @@ const GAME = {
       GAME.TURN.counter > 100 &&
       GAME.TURN.quickResolve &&
       GAME.TURN.slowFight()
-      ) {
+    ) {
       let HeroTurnsToDie = Math.round(HERO.health / GAME.TURN.enemyKillSpeed());
       let enemyTurnsToDie = Math.round(
         enemy.health / GAME.TURN.heroKillSpeed()
-        );
+      );
 
       CONSOLE.print("...");
       CONSOLE.print("...... and the battle goes on and on ....");
@@ -2462,10 +2460,10 @@ const GAME = {
       if (HeroTurnsToDie < enemyTurnsToDie) {
         CONSOLE.print(
           `After long and hard battle, <span class="blue">${HERO.name}</span> fell down exhausted and defeated.`
-          );
+        );
         let monsterHealthDecrease = Math.floor(
           enemyTurnsToDie * GAME.TURN.heroKillSpeed()
-          );
+        );
         enemy.health -= monsterHealthDecrease;
         enemy.health = Math.max(enemy.health, 1);
         HERO.health = 0;
@@ -2473,10 +2471,10 @@ const GAME = {
       } else {
         CONSOLE.print(
           `<span class="red">${enemy.title}</span> is too tired to block <span class="blue">${HERO.name}</span>'s attacks. <span class="blue">${HERO.name}</span> chops its head off.`
-          );
+        );
         let healthDecrease = Math.floor(
           HeroTurnsToDie * GAME.TURN.enemyKillSpeed()
-          );
+        );
         HERO.health -= healthDecrease;
         HERO.health = Math.max(HERO.health, 1);
         enemy.health = 0;
@@ -2517,7 +2515,7 @@ const GAME = {
       let damage = RND(
         Math.min(INI.ATTACk_OFFSET, Math.floor(delta / 2)),
         Math.max(delta, 1)
-        );
+      );
       return damage;
     },
     enemyDamage: 0,
@@ -2526,24 +2524,24 @@ const GAME = {
       return Math.max(
         GAME.TURN.enemyDamage / GAME.TURN.counter,
         INI.MIN_KILL_SPEED
-        );
+      );
     },
     enemyKillSpeed() {
       return Math.max(
         GAME.TURN.heroDamage / GAME.TURN.counter,
         INI.MIN_KILL_SPEED
-        );
+      );
     },
     slowFight() {
       return (
         GAME.TURN.enemyKillSpeed() < 0.5 && GAME.TURN.heroKillSpeed() < 0.5
-        );
+      );
     }
   },
   paintRestartButtons() {
     $("#buttons").prepend(
       `<input type='button' id='Restart' value='Restart game'>`
-      );
+    );
     $("#Restart").on("click", PRG.start);
     $("#pause").prop("disabled", true);
     const sg = localStorage.getItem(PRG.SG);
@@ -2553,29 +2551,20 @@ const GAME = {
   },
   won() {
     SAVE_GAME.delete(PRG.SG);
-    GAME.paintRestartButtons();
+    TITLE.restartTitle();
+    //GAME.paintRestartButtons();
     const text = GAME.generateWinningText();
     const RD = new RenderData("Arcade", 20, "#0F0", "bottomText");
-    const SQ = new Square(
-      0,
-      0,
-      LAYER.bottomText.canvas.width,
-      LAYER.bottomText.canvas.height
-      );
+    const SQ = new Square(0, 0, LAYER.bottomText.canvas.width, LAYER.bottomText.canvas.height);
     GAME.movingText = new MovingText(text, 3, RD, SQ);
     GAME.end();
   },
   over() {
-    GAME.paintRestartButtons();
+    //GAME.paintRestartButtons();
     TITLE.restartTitle();
     const text = GAME.generateEndingText();
     const RD = new RenderData("Consolas", 12, "orange", "bottomText");
-    const SQ = new Square(
-      0,
-      0,
-      LAYER.bottomText.canvas.width,
-      LAYER.bottomText.canvas.height
-      );
+    const SQ = new Square(0, 0, LAYER.bottomText.canvas.width, LAYER.bottomText.canvas.height);
     GAME.movingText = new MovingText(text, 2, RD, SQ);
     GAME.end();
   },
@@ -2587,7 +2576,7 @@ const GAME = {
       0,
       LAYER.bottomText.canvas.width,
       LAYER.bottomText.canvas.height
-      );
+    );
     GAME.movingText = new MovingText(text, 2, RD, SQ);
   },
   generateEndingText() {
@@ -2614,19 +2603,15 @@ const GAME = {
         victims.push(victim);
     }
     text += victims.join(", ");
-    text += `     You concluded ${PRG.NAME} ${
-      PRG.VERSION
-      }, a game by Lovro Selic, ${"\u00A9"} LaughingSkull ${PRG.YEAR} on ˘${
-      navigator.userAgent
+    text += `     You concluded ${PRG.NAME} ${PRG.VERSION
+      }, a game by Lovro Selic, ${"\u00A9"} LaughingSkull ${PRG.YEAR} on ˘${navigator.userAgent
       }. Now go outside and play with your friends. They might have been missing you by now ...          `;
     return text;
   },
   generateTitleText() {
-    let text = `${PRG.NAME} ${
-      PRG.VERSION
-      }, a game by Lovro Selic, ${"\u00A9"} LaughingSkull ${
-      PRG.YEAR
-      }. Title screen graphics by Trina Selic. Music: 'Look Me In The Eye, Demon' written and performed by LaughingSkull, ${"\u00A9"} 2011 Lovro Selic. `;
+    let text = `${PRG.NAME} ${PRG.VERSION
+      }, a game by Lovro Selic, ${"\u00A9"} LaughingSkull ${PRG.YEAR
+      }. Music: 'Look Me In The Eye, Demon' written and performed by LaughingSkull, ${"\u00A9"} 2011 Lovro Selic. `;
     text +=
       "     ENGINE, MAZE and GAME code by Lovro Selic using JavaScript ES7. ";
     text = text.split("").join(String.fromCharCode(8202));
@@ -2664,10 +2649,10 @@ const MINIMAP = {
       MINIMAP.maps[GAME.level] = {};
       MINIMAP.maps[GAME.level].buffer = new ArrayBuffer(
         MAP[GAME.level].width * MAP[GAME.level].height
-        );
+      );
       MINIMAP.maps[GAME.level].map = new Uint8Array(
         MINIMAP.maps[GAME.level].buffer
-        );
+      );
       let index;
       for (let y = 0; y < MAP[GAME.level].height; y++) {
         for (let x = 0; x < MAP[GAME.level].width; x++) {
@@ -2739,14 +2724,14 @@ const MINIMAP = {
           x + grid.x * INI.MINI_PIX,
           y + grid.y * INI.MINI_PIX,
           INI.MINI_PIX
-          );
+        );
       }
       CTX.fillStyle = MINIMAP.hero;
       CTX.pixelAt(
         x + HERO.MoveState.homeGrid.x * INI.MINI_PIX,
         y + HERO.MoveState.homeGrid.y * INI.MINI_PIX,
         INI.MINI_PIX
-        );
+      );
     });
   },
   unveil(grid, r = INI.MAP_RADIUS) {
@@ -2759,7 +2744,7 @@ const MINIMAP = {
         let index = x + y * MAP[GAME.level].width;
         MINIMAP.maps[GAME.level].map[index] &= 0b01111111;
       }
-  }
+    }
   }
 };
 const TITLE = {
@@ -2827,7 +2812,7 @@ const TITLE = {
       },
       true,
       true
-      );
+    );
   },
   bottomBlank() {
     var CTX = LAYER.bottom;
@@ -2845,7 +2830,7 @@ const TITLE = {
       },
       true,
       true
-      );
+    );
   },
   bottom() {
     var CTX = LAYER.bottom;
@@ -2863,7 +2848,7 @@ const TITLE = {
       },
       true,
       true
-      );
+    );
     CTX = LAYER.bottomText;
     CTX.textAlign = "center";
     var x = ENGINE.bottomWIDTH / 2;
@@ -2902,12 +2887,12 @@ const TITLE = {
     TITLE.stack.scrollIndex = Math.min(
       TITLE.stack.scrollIndex,
       HERO.scrolls.size() - 1
-      );
+    );
     let scrollSpread = ENGINE.spreadAroundCenter(
       TITLE.stack.scrollInRow,
       ENGINE.sideWIDTH / 2 - 16,
       TITLE.stack.scrollDelta
-      );
+    );
     var CTX = LAYER[TITLE.STATUS.layer];
     CTX.save();
     ENGINE.resetShadow(CTX);
@@ -2919,7 +2904,7 @@ const TITLE = {
     let start = Math.max(
       0,
       TITLE.stack.scrollIndex - TITLE.stack.scrollInRow + 1
-      );
+    );
     start = Math.min(start, LN - TITLE.stack.scrollInRow);
     if (start < 0)
       start = 0;
@@ -2942,7 +2927,7 @@ const TITLE = {
         scroll.count.toString().padStart(2, "0"),
         x + 32,
         y + 18 + 4
-        );
+      );
 
       if (q === TITLE.stack.scrollIndex) {
         CTX.globalAlpha = 0.5;
@@ -3173,8 +3158,11 @@ const TITLE = {
     AUDIO.Title.play();
   },
   restartTitle() {
-    if (AUDIO.Title)
-      AUDIO.Title.play();
+    if (AUDIO.Title) {
+      setTimeout(function () {
+        AUDIO.Title.play();
+      }, 5000);
+    }
     TITLE.drawButtons();
   },
   startTitle() {
@@ -3187,6 +3175,7 @@ const TITLE = {
     let cname = ENGINE.getCanvasName("ROOM");
     ENGINE.topCanvas = cname;
     TITLE.drawButtons();
+    if (AUDIO.Title) AUDIO.Title.play();
     GAME.setTitle();
     ENGINE.GAME.start(); //INIT game loop
     ENGINE.GAME.ANIMATION.next(GAME.runTitle);
@@ -3194,8 +3183,8 @@ const TITLE = {
   drawButtons() {
     ENGINE.clearLayer("button");
     FORM.BUTTON.POOL.clear();
-    if (AUDIO.Title)
-      AUDIO.Title.play();
+    /*if (AUDIO.Title)
+      AUDIO.Title.play();*/
     let x = 48;
     let y = 600;
     let w = 166;
@@ -3206,7 +3195,7 @@ const TITLE = {
 
     FORM.BUTTON.POOL.push(
       new Button("Start new game", startBA, buttonColors, PRG.start)
-      );
+    );
     const sg = localStorage.getItem(PRG.SG);
     if (sg) {
       y += 1.5 * h;
@@ -3217,14 +3206,14 @@ const TITLE = {
           resumeBA,
           buttonColors,
           PRG.checkpoint
-          )
-        );
+        )
+      );
     }
     y += 1.5 * h;
     let music = new Area(x, y, w, h);
     FORM.BUTTON.POOL.push(
       new Button("Play title music", music, musicColors, TITLE.music)
-      );
+    );
     FORM.BUTTON.draw();
     $(ENGINE.topCanvas).mousemove(ENGINE.mouseOver);
     $(ENGINE.topCanvas).click(ENGINE.mouseClick);
@@ -3242,7 +3231,7 @@ class Monster {
       0,
       "front",
       ASSET[this.type.name]
-      );
+    );
     GRID.gridToSprite(this.grid, this.actor);
     this.alignToViewport();
     this.MoveState = new MoveState(this.grid, DOWN);
@@ -3329,12 +3318,12 @@ class Monster {
       drop = SCROLLS.chooseRandom();
       MAP[GAME.level].DUNGEON.scrolls.push(
         new Scroll(grid, drop.type, drop.use)
-        );
+      );
     } else {
       let factor = 1.0 + Math.floor((luck - HERO.luck) / HERO.luck) / 10;
       let value = Math.round(
         RND(Math.floor(this.gold / 2), this.gold) * factor
-        );
+      );
       drop = new Gold(value, grid);
       MAP[GAME.level].DUNGEON.gold.push(drop);
     }
@@ -3350,7 +3339,7 @@ class Monster {
     if (damage > 0) {
       CONSOLE.print(
         `<span class="red">${this.type.title}</span> hits and makes <span class="red">${damage}</span> damage.`
-        );
+      );
       HERO.health -= damage;
       HERO.health = Math.max(HERO.health, 0);
       if (HERO.health <= 0) {
@@ -3365,7 +3354,7 @@ class Monster {
     CONSOLE.print(`<span class="red">${this.title}</span> was killed.`);
     CONSOLE.print(
       `<span class="blue">${HERO.name} gets ${this.exp} XP.</span>`
-      );
+    );
     GAME.TURN.fight_active = false;
     MAP[GAME.level].DUNGEON.ENEMY.splice(GAME.TURN.enemyIndex, 1);
     GAME.CLICK.endFight();
@@ -3381,8 +3370,8 @@ class Monster {
         GRID.gridToCoord(this.MoveState.homeGrid),
         "#00FF00",
         100
-        )
-      );
+      )
+    );
   }
   petrify() {
     if (this.petrified)
