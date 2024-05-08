@@ -1,4 +1,4 @@
-/* LS CSS v0.5.3 */
+/* LS CSS v0.6.0 */
 
 @charset "utf-8";
 
@@ -65,6 +65,12 @@
 @font-face {
     font-family: "Flow";
     src: url("/Assets/Fonts/N-Gage.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Drip";
+    src: url("/Assets/Fonts/adrip.ttf");
     font-display: swap;
 }
 

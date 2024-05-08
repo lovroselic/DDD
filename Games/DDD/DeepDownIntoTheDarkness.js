@@ -8,8 +8,6 @@
 /*  
  
  to do:
-  * engine upgrade
-  * animation speed
  
  
  known bugs:
@@ -82,7 +80,7 @@ const INI = {
   FINAL_GOLD: 100
 };
 const PRG = {
-  VERSION: "1.02.00",
+  VERSION: "1.02",
   CSS: "color: #80f709",
   NAME: "Deep Down Into the Darkness",
   YEAR: 2020,
@@ -127,7 +125,7 @@ const PRG = {
     $(ENGINE.topCanvas).off("mousemove", ENGINE.mouseOver);
     $(ENGINE.topCanvas).off("click", ENGINE.mouseClick);
     $(ENGINE.topCanvas).css("cursor", "");
-    console.log(AUDIO.Title);
+ 
     if (AUDIO.Title) {
       AUDIO.Title.pause();
       AUDIO.Title.currentTime = 0;
@@ -2555,7 +2553,7 @@ const GAME = {
     //GAME.paintRestartButtons();
     const text = GAME.generateWinningText();
     const RD = new RenderData("Arcade", 20, "#0F0", "bottomText");
-    const SQ = new Square(0, 0, LAYER.bottomText.canvas.width, LAYER.bottomText.canvas.height);
+    const SQ = new Area(0, 0, LAYER.bottomText.canvas.width, LAYER.bottomText.canvas.height);
     GAME.movingText = new MovingText(text, 3, RD, SQ);
     GAME.end();
   },
@@ -2564,19 +2562,14 @@ const GAME = {
     TITLE.restartTitle();
     const text = GAME.generateEndingText();
     const RD = new RenderData("Consolas", 12, "orange", "bottomText");
-    const SQ = new Square(0, 0, LAYER.bottomText.canvas.width, LAYER.bottomText.canvas.height);
+    const SQ = new Area(0, 0, LAYER.bottomText.canvas.width, LAYER.bottomText.canvas.height);
     GAME.movingText = new MovingText(text, 2, RD, SQ);
     GAME.end();
   },
   setTitle() {
     const text = GAME.generateTitleText();
     const RD = new RenderData("Drip", 20, "#0E0", "bottomText");
-    const SQ = new Square(
-      0,
-      0,
-      LAYER.bottomText.canvas.width,
-      LAYER.bottomText.canvas.height
-    );
+    const SQ = new Area(0, 0, LAYER.bottomText.canvas.width, LAYER.bottomText.canvas.height);
     GAME.movingText = new MovingText(text, 2, RD, SQ);
   },
   generateEndingText() {
@@ -2769,7 +2762,7 @@ const TITLE = {
     var CTX = LAYER.title;
     TITLE.background();
     var fs = 42;
-    CTX.font = fs + "px Arcade";
+    CTX.font = fs + "px Drip";
     CTX.textAlign = "center";
     var txt = CTX.measureText(PRG.NAME);
     var x = ENGINE.titleWIDTH / 2;
