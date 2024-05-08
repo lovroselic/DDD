@@ -2805,8 +2805,9 @@ class Form {
       top: this.y,
       left: this.x,
       width: this.w,
-      height: this.h
+      //height: this.h
     });
+
     $("#FORM").append(wedge);
     ENGINE.showMouse();
   }

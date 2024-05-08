@@ -8,6 +8,9 @@
 /*  
  
  to do:
+  * score
+  * engine upgrade
+  * animation speed
  
  
  known bugs:
@@ -80,7 +83,7 @@ const INI = {
   FINAL_GOLD: 100
 };
 const PRG = {
-  VERSION: "1.01.01",
+  VERSION: "1.01.02",
   CSS: "color: #80f709",
   NAME: "Deep Down Into the Darkness",
   YEAR: 2020,
@@ -3177,6 +3180,7 @@ const TITLE = {
   startTitle() {
     TITLE.background();
     TITLE.side();
+    TITLE.title();
     ENGINE.draw("background", 0, 0, TEXTURE.DDID_Cover);
     TITLE.bottomBlank();
     $("#DOWN")[0].scrollIntoView();
@@ -3429,7 +3433,7 @@ $(function () {
   PRG.INIT();
   PRG.setup();
   ENGINE.LOAD.preload();
-  SCORE.init("SC", "DDID", 10, 1000);
+  SCORE.init("SC", "DDID", 7, 1000);
   SCORE.refresh();
   const BACKUP_MAP = $.extend(true, {}, MAP);
   SAVE_GAME.setKey(PRG.SG);

@@ -66,8 +66,8 @@ var LoadTextures = [
 var LoadSprites = [
 
   //keys
-  { srcName: "Sprites/Keys/GoldKeySmall.png", name: "GoldKey" },
-  { srcName: "Sprites/Keys/SilverKeySmall.png", name: "SilverKey" },
+  { srcName: "Sprites/Keys/GoldKeySmall.png", name: "goldKey" },
+  { srcName: "Sprites/Keys/SilverKeySmall.png", name: "silverKey" },
   { srcName: "Sprites/Keys/GoldKey.png", name: "GoldKeyBig" },
   { srcName: "Sprites/Keys/SilverKey.png", name: "SilverKeyBig" },
 
